@@ -1,0 +1,82 @@
+.example.xyz
+.example.stream
+.example.party
+.example.click
+.example.win
+.example.download
+.example.bid
+.example.vip
+.example.net
+
+
+
+curl https://www.example.net --max-time 5
+
+
+************************
+**** EXAMPLE OUTPUT ****
+************************
+
+curl: (28) Connection timed out after 5000 milliseconds
+
+
+
+alert tcp any any <> any 443 (msg:"SURICATA Port 443 but not TLS"; flow:to_server,established; app-layer-protocol:!tls; sid:2271003; rev:1;)
+
+
+
+
+Domain Lists 
+
+*.example.xyz
+*.example.stream
+*.example.party
+*.example.click
+*.example.win
+*.example.download
+*.example.bid
+*.example.vip
+*.example.net
+
+
+
+
+fields @timestamp, @message
+| display event.timestamp
+
+
+fields @timestamp, @message
+| filter event.alert.signature like /denylisted FQDNs/
+| display event.tls.sni, event.src_ip
+
+
+ Expected output:
+
+#	event.tls.sni	event.src_ip
+ 1	www.example.net	10.1.1.230
+
+
+
+fields @timestamp, @message
+| filter event.proto like /ICMP/
+| display event.src_ip
+| sort event.src_ip desc
+
+
+ Expected output:
+
+#	event.src_ip
+ 1	10.2.1.85
+ 2	10.2.1.85
+ 3	10.2.1.85
+…	
+
+
+
+fields @timestamp, @message
+| filter event.alert.signature like /SURICATA/
+| display event.src_ip
+| sort event.src_ip desc
+
+
+
