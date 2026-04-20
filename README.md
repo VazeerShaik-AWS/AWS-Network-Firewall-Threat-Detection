@@ -1,4 +1,4 @@
-# Threat Detection and Traffic Inspection using AWS Network Firewall
+# Threat Detection using AWS Network Firewall
 
 ## Overview
 
