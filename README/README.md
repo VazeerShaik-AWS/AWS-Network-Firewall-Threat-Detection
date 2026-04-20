@@ -53,7 +53,7 @@ Reduced attack surface
 
 
 
-## 👨‍💻 Author
+## Author
 
 **Vazeer Shaik**
 
